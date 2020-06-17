@@ -28,7 +28,8 @@ CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `identification` int(11) NOT NULL
+  `identification` int(11) NOT NULL,
+  `rol` ENUM('admin','client') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
