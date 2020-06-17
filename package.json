@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/alejomateus/acamica-last-workshop-home-banking#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const { sequelize, Sequelize } = require('./database');
 const jwt = require('jsonwebtoken');
+const { json } = require('body-parser');
 const signature = 'acamica';
 
 app.use(bodyParser.json());
@@ -53,6 +54,24 @@ function validateUserIdentification(req, res, next) {
         });
 }
 
+function decryptUser(req, res, next){
+    const token = req.headers.authorization.split(' ')[1];
+    const tokenVerification = jwt.verify(token, signature);
+    console.log(tokenVerification);
+    
+    if (tokenVerification) {
+        req.user = tokenVerification;
+        if (req.user.rol == "admin") {
+           next(); 
+        } else{
+            res.status(403).json({msg: "User without permissions"});
+        }
+        
+    } else{
+        res.status(401).json({msg: "Invalid token"});
+    }
+}
+
 // End points
 // login user_transfer admin_transfer register
 
@@ -80,8 +99,8 @@ app.post('/userTransfer', (req, res) => {
 
 });
 
-app.post('/adminTransfer', (req, res) => {
-
+app.post('/adminTransfer', decryptUser, (req, res) => {
+    res.json({msg: "Works!!!"})
 });
 
 app.listen(3000, () => {
