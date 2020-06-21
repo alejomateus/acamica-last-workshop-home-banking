@@ -14,9 +14,9 @@ const jwtMiddleware = (req, res, next) => {
     const { identification, password } = req.body;
     let valid = false;
     sequelize.query('SELECT * FROM Users',
-    {
-        type: Sequelize.QueryTypes.SELECT
-    })
+        {
+            type: Sequelize.QueryTypes.SELECT
+        })
         .then(usersQuery => {
             if (usersQuery) {
                 users = usersQuery;
@@ -54,26 +54,23 @@ function validateUserIdentification(req, res, next) {
         });
 }
 
-function decryptUser(req, res, next){
+function decryptUser(req, res, next) {
     const token = req.headers.authorization.split(' ')[1];
     const tokenVerification = jwt.verify(token, signature);
     console.log(tokenVerification);
-    
+
     if (tokenVerification) {
         req.user = tokenVerification;
         if (req.user.rol == "admin") {
-           next(); 
-        } else{
-            res.status(403).json({msg: "User without permissions"});
+            next();
+        } else {
+            res.status(403).json({ msg: "User without permissions" });
         }
-        
-    } else{
-        res.status(401).json({msg: "Invalid token"});
+
+    } else {
+        res.status(401).json({ msg: "Invalid token" });
     }
 }
-
-// End points
-// login user_transfer admin_transfer register
 
 app.post('/register', (req, res) => {
     const { name, lastname, identification, password, rol } = req.body;
@@ -100,7 +97,7 @@ app.post('/userTransfer', (req, res) => {
 });
 
 app.post('/adminTransfer', decryptUser, (req, res) => {
-    res.json({msg: "Works!!!"})
+    res.json({ msg: "Works!!!" })
 });
 
 app.listen(3000, () => {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon main.js"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,5 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.13"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
   }
 }
