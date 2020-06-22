@@ -12,7 +12,7 @@ USE `home_banking`;
 CREATE TABLE `Accounts` (
   `id` int(11) NOT NULL,
   `idUser` int(11) DEFAULT NULL,
-  `account_number` int(11) DEFAULT NULL,
+  `accountNumber` int(11) DEFAULT NULL,
   `balance` double(40,2) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `status` enum ('active','inactive') DEFAULT 'active'
@@ -68,6 +68,7 @@ ALTER TABLE `Transfers`
   ADD CONSTRAINT `Transfers_ibfk_1` FOREIGN KEY (`idAccountOrigin`) REFERENCES `Accounts` (`id`),
   ADD CONSTRAINT `Transfers_ibfk_2` FOREIGN KEY (`idAccountDestination`) REFERENCES `Accounts` (`id`),
   ADD CONSTRAINT `Transfers_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `Users` (`id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
